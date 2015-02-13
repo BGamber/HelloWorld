@@ -1,0 +1,135 @@
+import time
+
+
+class Calculator:
+    """Performs basic arithmetic with given values."""
+
+    choice = 0
+    ziggy_count = 0
+
+    # Adds two given values.
+    # Returns num1 + num2
+    def __add(self, num1, num2):
+        total = (num1 + num2)
+        return total
+
+    # Subtracts one given value from another.
+    # Returns num1 - num2
+    def __subtract(self, num1, num2):
+        total = (num1 - num2)
+        return total
+
+    # Multiplies one given value by another.
+    # Returns num1 * num2
+    def __multiply(self, num1, num2):
+        total = (num1 * num2)
+        return total
+
+    # Divides one given value by another.
+    # Returns num1 / num2
+    def __divide(self, num1, num2):
+        total = (num1 / num2)
+        return total
+
+    # Test whether given value is an integer or not.
+    # Return True if it is; else, return false.
+    def __is_integer(self, input):
+        try:
+            int(input)
+        except ValueError:
+            return False
+        else:
+            return True
+
+    # Lists desired inputs and prompts user to select one.
+    # Prompts user to select valid option if invalid input is given.
+    def __request_input(self):
+        print("\nChoose an operation:")
+        print("1. Add")
+        print("2. Subtract")
+        print("3. Multiply")
+        print("4. Divide")
+        print("5. -Exit-")
+
+        choice = raw_input("Enter selection: ")
+
+        if self.__is_integer(choice):
+            self.__do_math(choice)
+
+        # Easter egg!
+        elif choice == 'ziggy':
+            self.ziggy_count += 1
+            if self.ziggy_count < 5:
+                print("The world has exploded. Good job.")
+            elif self.ziggy_count in range(5, 10):
+                print("You exploded the world... again.")
+            else:
+                print("The world can only explode so many times.")
+            time.sleep(1.5)
+
+        else:
+            print("Please select a valid operation.")
+            time.sleep(0.5)
+
+    # Perform calculations based on user input.
+    def __do_math(self, choice):
+        if int(choice) == 1:
+            try:
+                add1 = float(raw_input("Enter first number: "))
+                add2 = float(raw_input("Enter second number: "))
+                total = self.__add(add1, add2)
+                print("Result: " + ("%.12g" % total))
+            except (TypeError, ValueError):
+                print("Error: Please enter a number.")
+            time.sleep(1.5)
+
+        elif int(choice) == 2:
+            try:
+                sub1 = float(raw_input("Enter first number: "))
+                sub2 = float(raw_input("Enter second number: "))
+                total = self.__subtract(sub1, sub2)
+                print("Result: " + ("%.12g" % total))
+            except (TypeError, ValueError):
+                print("Error: Please enter a number.")
+            time.sleep(1.5)
+
+        elif int(choice) == 3:
+            try:
+                mul1 = float(raw_input("Enter first number: "))
+                mul2 = float(raw_input("Enter second number: "))
+                total = self.__multiply(mul1, mul2)
+                print("Result: " + ("%.12g" % total))
+            except (TypeError, ValueError):
+                print("Error: Please enter a number.")
+            time.sleep(1.5)
+
+        elif int(choice) == 4:
+            try:
+                div1 = float(raw_input("Enter first number: "))
+                div2 = float(raw_input("Enter second number: "))
+                total = self.__divide(div1, div2)
+                print("Result: " + ("%.12g" % total))
+            except (TypeError, ValueError):
+                print("Error: Please enter a number.")
+            except ZeroDivisionError:
+                print("You can't divide by zero!")
+            time.sleep(1.5)
+
+        elif int(choice) == 5:
+            self.choice = 5
+
+        else:
+            print("Please select a valid operation.")
+            time.sleep(0.5)
+
+    # Primary method. Loops until user enters 5 for input.
+    def run(self):
+        while self.choice != 5:
+            self.__request_input()
+
+        print("Program terminated.")
+        time.sleep(0.5)
+
+# Create Calculator object and call run method.
+calc = Calculator()
+calc.run()
